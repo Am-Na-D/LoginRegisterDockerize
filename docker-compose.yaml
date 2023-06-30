@@ -1,11 +1,15 @@
+version: '3.8'
+name: mobina
 services:
   web:
     build: .
-    container_name: webserver
     ports:
-      - 5005:5000
+      - "5000"
+    deploy:
+      replicas: 4
     depends_on:
       - mysql
+
   mysql: 
     container_name: sqlserver
     image: mysql
@@ -16,3 +20,14 @@ services:
     volumes:
       - ./initialdb:/docker-entrypoint-initdb.d
       - ./database:/var/lib/mysql
+
+  nginx: 
+    container_name: nginx
+    image: nginx
+    ports:
+      - 8888:80
+    depends_on:
+      - mysql
+      - web
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
