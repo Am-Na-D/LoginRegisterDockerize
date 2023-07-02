@@ -1,2 +1,5 @@
 venv/
-database/
+data/
+initialslave/
+initialdb/userinit.sql
+docker-compose.yamlmyconfigslaveproblem
