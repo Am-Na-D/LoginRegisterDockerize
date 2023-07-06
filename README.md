@@ -111,10 +111,7 @@ set FLASK_APP=main
 flask run
 
 ```
-          
+ Dockerize
 
-![Image description](https://github.com/HarunHM/Login-System-with-Python-Flask-and-MySQL/blob/master/static/Screenshot%20from%202020-01-11%2020-25-25.png?raw=true)
-
-
-
-Note:-The version of python i use will change in future , so check your python IDE with latest version and if this doesn't work get in touch with me on twitter, https://twitter.com/HarunMbaabu. 
+when younuse docker desktop in windows accordint to the base of the unix kernel windows you must convert run.sh to unix base 
+so there are 3 lines in dockerfile that do this job and can run it in linux container on windows docker desktop 
