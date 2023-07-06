@@ -4,7 +4,6 @@ WORKDIR /pythonproject
 COPY requirements.txt .
 #install requirments
 RUN pip install -r requirements.txt
-#COPY run_unix.sh run.sh
 COPY . .
 
 #windows docker desktop
