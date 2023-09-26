@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - name: mysql-service
+          image: bitnami/mysql:latest
+          env:
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: login-secret
+                key: mysql-root-password
+          - name: MYSQL_USER
+            valueFrom:
+              secretKeyRef:
+                name: login-secret
+                key: user-mysql
+          - name: MYSQL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: login-secret
+                key: pass-mysql              
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - name: dbcreate
+              mountPath: /docker-entrypoint-initdb.d
+            - name: mysql-data
+              mountPath: /bitnami/mysql/data
+      volumes:
+        - name: dbcreate
+          configMap:
+            name: dbcreate
+        - name: mysql-data
+          persistentVolumeClaim:
+            claimName: local-pvc
